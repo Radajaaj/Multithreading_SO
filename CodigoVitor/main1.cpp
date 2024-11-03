@@ -12,7 +12,8 @@ int main(){
     }
 
     int numThreads = 0;
-    int sincrono = -1;
+int sincrono = -1;
+    int tamanhoFila = 200;
 
     while(numThreads < 1){  //Selecionamos o numero de threads
         cout << "--_-''- Boas Vindas ao Sistema! -''-_--" << endl;
@@ -45,17 +46,17 @@ int main(){
     //Armazenamos tudo em uma matriz (vector de vectors). Daí cada linha é passada para cada máquina de ponto
 
     //Definição da matriz:
-    // Cada fila vem com 15 pessoas, cada um com sua ID gerada randomicamente.
-    vector<vector<int>> matriz(numThreads, vector<int>(15, 0));
+    // Cada fila vem com tamanhoFila pessoas, cada um com sua ID gerada randomicamente.
+    vector<vector<int>> matriz(numThreads, vector<int>(tamanhoFila, 0));
 
     for (int i = 0; i < numThreads; i++){
-        for (int j = 0; j < 15; j++){
+        for (int j = 0; j < tamanhoFila; j++){
             matriz[i][j] = rand();
         }
     }
 
     for (int i = 0; i < numThreads; i++){
-        for (int j = 0; j < 15; j++){
+        for (int j = 0; j < tamanhoFila; j++){
             cout << matriz[i][j] << " ";
         }
         cout << endl;

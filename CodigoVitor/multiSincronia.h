@@ -1,4 +1,4 @@
-#include "multAssincronia.h"
+#include "header.h"
 
 //Escreve o horário e o nome do funcionário no arquivo.
 void maquinaPontoSincrona(const vector<int> &filaFuncionarios, ofstream &Arquivo){
@@ -6,12 +6,18 @@ void maquinaPontoSincrona(const vector<int> &filaFuncionarios, ofstream &Arquivo
 
     for (int numero : filaFuncionarios) {   //Pega cada coiso do vetor e joga na var, que nem no python
 
-        mensagem = getHorario() + " ID: " + to_string(numero) + "\tTID: " + to_string(std::hash<std::thread::id>{}(std::this_thread::get_id()));
-        cout << endl << mensagem;
+        //mensagem = getHorario() + " ID: " + to_string(numero) + "\tTID: " + to_string(std::hash<std::thread::id>{}(std::this_thread::get_id()));
+        //cout << endl << mensagem;
 
         std::lock_guard<std::mutex> lock(mtx);  //Mutex
         if (Arquivo.is_open()){
-            Arquivo << mensagem << endl;
+            //Arquivo << mensagem << endl;
+            Arquivo << getHorario();
+            Arquivo << " ID: ";
+            Arquivo << to_string(numero);
+            Arquivo << "\tTID: ";
+            Arquivo << to_string(std::hash<std::thread::id>{}(std::this_thread::get_id()));
+            Arquivo << endl;
         } else {
             std::cerr << "Erro: Arquivo não está aberto!" << std::endl;
         }
