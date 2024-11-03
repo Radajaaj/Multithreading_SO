@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1730603620 source:/home/gabriel/Documents/SO/SO/main.cpp
+	<iostream>
+	<thread>
+	<chrono>
+
