@@ -15,18 +15,18 @@ std::atomic<bool> emUso(false);
 // Função para simular o registro de ponto
 void registrarPonto(int id, char tecla) {
     while (true) {
-        std::cout << "Pressione '" << tecla << "' para o Funcionário " << id << " registrar seu ponto ou 'S' para sair:\n";
+        std::cout << "Pressione '" << tecla << "' para o Funcionario " << id << " registrar seu ponto ou 'S' para sair:\n";
         std::string comando;
         std::getline(std::cin, comando);
 
         if (comando == "S" || comando == "s") {
-            std::cout << "Funcionário " << id << " saiu.\n";
+            std::cout << "Funcionario " << id << " saiu.\n";
             break; // Encerra o loop se o funcionário escolher sair
         }
 
         if (comando == std::string(1, tecla)) { // Verifica se a tecla correta foi pressionada
             if (emUso.exchange(true)) { // Tenta entrar em uso
-                std::cout << "Arquivo já está em uso. Funcionário " << id << ", tente novamente mais tarde.\n";
+                std::cout << "Arquivo ja esta em uso. Funcionario " << id << ", tente novamente mais tarde.\n";
                 continue; // Retorna ao início do loop se o arquivo estiver em uso
             }
 
@@ -40,7 +40,7 @@ void registrarPonto(int id, char tecla) {
                 std::ofstream registro("registros.txt", std::ios::app);
                 if (registro.is_open()) {
                     // Simula a gravação do ponto
-                    std::string ponto = "Funcionário " + std::to_string(id) + " registrou ponto em " +
+                    std::string ponto = "Funcionario " + std::to_string(id) + " registrou ponto em " +
                                         std::to_string(std::time(nullptr)) + "\n";
                     registro << ponto;
                     std::cout << ponto;
@@ -52,7 +52,7 @@ void registrarPonto(int id, char tecla) {
 
             emUso = false; // Libera o uso após a gravação
         } else {
-            std::cout << "Comando inválido. Tente novamente.\n";
+            std::cout << "Comando invalido. Tente novamente.\n";
         }
     }
 }
