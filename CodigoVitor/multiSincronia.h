@@ -1,6 +1,19 @@
 #include "multAssincronia.h"
 
+//Escreve o horário e o nome do funcionário no arquivo.
 void maquinaPontoSincrona(const vector<int> &filaFuncionarios, ofstream &Arquivo){
-    cout << "Multi sincrona" << endl;
+    string mensagem = "";                   //Armazena a string a ser colocada no arquivo
 
+    for (int numero : filaFuncionarios) {   //Pega cada coiso do vetor e joga na var, que nem no python
+
+        mensagem = getHorario() + " ID: " + to_string(numero) + "\tTID: " + to_string(std::hash<std::thread::id>{}(std::this_thread::get_id()));
+        cout << endl << mensagem;
+
+        std::lock_guard<std::mutex> lock(mtx);  //Mutex
+        if (Arquivo.is_open()){
+            Arquivo << mensagem << endl;
+        } else {
+            std::cerr << "Erro: Arquivo não está aberto!" << std::endl;
+        }
+    }
 }

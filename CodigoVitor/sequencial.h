@@ -1,20 +1,18 @@
 #include "multiSincronia.h"
 
+//Escreve o horário e o nome do funcionário no arquivo.
 void maquinaPontoSequencial(const vector<int> &filaFuncionarios, ofstream &Arquivo){
-    //O que que vai fazer: vai abrir o arquivo, escrever o nome do funcionário e o horário nele, e fechar.
-    string mensagem = "";
-    string numeroString = "";
+    string mensagem = "";                   //Armazena a string a ser colocada no arquivo
 
-    // "Range-Based loop" para iterar por elementos de um vetor
-    // Vi no reddit, parece elegante
-    for (int numero : filaFuncionarios) {   //Basicamente ele pega cada coiso do vetor e joga nessa variavel
-        //cout << numero << " ";                // Que nem no python
+    for (int numero : filaFuncionarios) {   //Pega cada coiso do vetor e joga na var, que nem no python
 
-        mensagem = getHorario() + " ID: " + to_string(numero);
+        mensagem = getHorario() + " ID: " + to_string(numero) + "\tTID: " + to_string(std::hash<std::thread::id>{}(std::this_thread::get_id())); 
         cout << endl << mensagem;
 
-        Arquivo << mensagem << endl;
+        if (Arquivo.is_open()){
+            Arquivo << mensagem << endl;
+        } else {
+            std::cerr << "Erro: Arquivo não está aberto!" << std::endl;
+        }
     }
-
-
 }

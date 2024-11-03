@@ -69,17 +69,28 @@ int main(){
             maquinaPontoSequencial(matriz[i], Arquivo);
         }
     }else{
+
+        vector<std::thread> threads;    //Vetor para aramzenar as threads criadas dinamicamente
+
+
         if(sincrono == 1){  //Multithread com sincronização
-            for(int i = 0; i < numThreads; i++){
-                maquinaPontoSincrona(matriz[i], Arquivo);
+            for(int i = 0; i < numThreads; i++){    //Thredas dinâmicas
+                threads.emplace_back(maquinaPontoSincrona, std::cref(matriz[i]), std::ref(Arquivo));
             }
         }else{              //Nultithread sem sincronização
             for(int i = 0; i < numThreads; i++){
-                maquinaPontoAssincrona(matriz[i], Arquivo);
+                threads.emplace_back(maquinaPontoSequencial, std::cref(matriz[i]), std::ref(Arquivo));
             }
         }
+    
+        for (auto &thread : threads){   //Join nas threads dinâmicas
+            thread.join();
+        }
+    
     }
 
+
+    Arquivo.close();
 
 
     return 0;

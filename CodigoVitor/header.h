@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <mutex>
 #include <vector>
 #include <random>
 #include <fstream>
@@ -8,6 +9,7 @@
 #include <ctime>
 #include <sstream>
 #include <string>
+#include <windows.h>
 
 using std::cout;
 using std::cin;
@@ -16,6 +18,8 @@ using std::vector;
 using std::endl;
 using std::ofstream;
 using std::to_string;
+
+std::mutex mtx;
 
 string getHorario(){    //Pega o horario atual em formato de string
     auto t = std::time(nullptr);    //Peguei do stack overflow
