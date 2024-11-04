@@ -1,5 +1,0 @@
-Funcionario 1 registrou ponto em 1730654444
-Funcionario 2 registrou ponto em 1730654457
-Funcionario 3 registrou ponto em 1730654470
-Funcionario 3 registrou ponto em 1730654472
-Funcionario 1 registrou ponto em 1730654476
